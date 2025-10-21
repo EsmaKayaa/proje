@@ -36,72 +36,58 @@ Veri toplama süreci **`data_preparation.py`** dosyasında otomatik olarak gerç
   "url": "https://en.wikipedia.org/wiki/Cybersecurity"
 }
 
+## 🧠 Kullanılan Yöntemler ve Teknolojiler
 
-🧠 Kullanılan Yöntemler ve Teknolojiler
-Teknoloji	Kullanım Amacı
-LangChain	RAG zinciri oluşturma, belge işleme
-Chroma	Vektör veritabanı (embedding saklama)
-Google Gemini API (Generative AI)	Embedding & LLM yanıt üretimi
-Wikipedia API	Veri kaynağı
-Streamlit	Web arayüzü
-Python-dotenv	API anahtarı yönetimi
-🔍 RAG Mimarisi
+| Teknoloji | Kullanım Amacı |
+| :--- | :--- |
+| LangChain | RAG zinciri oluşturma, belge işleme |
+| Chroma | Vektör veritabanı (embedding saklama) |
+| Google Gemini API (Generative AI) | Embedding & LLM yanıt üretimi |
+| Wikipedia API | Veri kaynağı |
+| Streamlit | Web arayüzü |
+| Python-dotenv | API anahtarı yönetimi |
+
+## 🔍 RAG Mimarisi
 
 Retrieval-Augmented Generation (RAG) modeli iki temel aşamadan oluşur:
 
-1️⃣ Retriever (Bilgi Getirici):
-Kullanıcının sorusuna en uygun belge parçalarını Chroma vektör veritabanı içinden bulur.
+1.  **Retriever (Bilgi Getirici):** Kullanıcının sorusuna en uygun belge parçalarını Chroma vektör veritabanı içinden bulur.
+2.  **Generator (Cevap Üretici):** Bulunan belgeleri Google Gemini modeline aktararak, anlamlı ve doğal bir cevap üretir.
 
-2️⃣ Generator (Cevap Üretici):
-Bulunan belgeleri Google Gemini modeline aktararak, anlamlı ve doğal bir cevap üretir.
+**Akış Diyagramı:**
 
-Akış Diyagramı:
+Soru --> Retriever (Chroma DB) --> İlgili Belgeler --> LLM (Gemini) --> Cevap + Kaynak
 
-Soru ➜ Retriever (Chroma DB) ➜ İlgili Belgeler ➜ LLM (Gemini) ➜ Cevap + Kaynak
-
-🧩 Çözüm Mimarisi
+## 🧩 Çözüm Mimarisi
 
 Proje 4 ana bileşenden oluşur:
 
-Dosya	Açıklama
-data_preparation.py	Wikipedia’dan veriyi çeker, temizler ve kaydeder.
-build_vector_db.py	Metinleri böler, embedding uygular ve Chroma DB oluşturur.
-cli_chatbot.py	Terminal tabanlı sohbet arayüzü.
-app.py	Streamlit tabanlı web arayüzü.
+| Dosya | Açıklama |
+| :--- | :--- |
+| `data_preparation.py` | Wikipedia’dan veriyi çeker, temizler ve kaydeder. |
+| `build_vector_db.py` | Metinleri böler, embedding uygular ve Chroma DB oluşturur. |
+| `cli_chatbot.py` | Terminal tabanlı sohbet arayüzü. |
+| `app.py` | Streamlit tabanlı web arayüzü. |
 
-Genel Yapı:
+**Genel Yapı:**
 
-cybersecurity-rag-chatbot/
-│
-├── data/
-│   ├── wikipedia_cybersecurity.txt
-│   ├── wikipedia_meta.json
-│
-├── vector_db/
-│
-├── app.py
-├── cli_chatbot.py
-├── build_vector_db.py
-├── data_preparation.py
-├── .env
-├── requirements.txt
-└── README.md
+cybersecurity-rag-chatbot/ │ ├── data/ │ ├── wikipedia_cybersecurity.txt │ ├── wikipedia_meta.json │ ├── vector_db/ │ ├── app.py ├── cli_chatbot.py ├── build_vector_db.py ├── data_preparation.py ├── .env ├── requirements.txt └── README.md
 
-⚙️ Kodun Çalışma Kılavuzu
-1️⃣ Ortam Kurulumu
-git clone https://github.com/kullaniciadi/cybersecurity-rag-chatbot.git
+
+## ⚙️ Kodun Çalışma Kılavuzu
+
+### 1. Ortam Kurulumu
+```bash
+git clone [https://github.com/kullaniciadi/cybersecurity-rag-chatbot.git](https://github.com/kullaniciadi/cybersecurity-rag-chatbot.git)
 cd cybersecurity-rag-chatbot
+2. Sanal Ortam (Virtual Env) Kurulumu
+Bash
 
-2️⃣ Sanal Ortam (Virtual Env) Kurulumu
 python -m venv venv
 source venv/bin/activate     # (Mac/Linux)
-venv\Scripts\activate        # (Windows)
-
-3️⃣ Gerekli Kütüphaneleri Yükle
-pip install -r requirements.txt
-
-
-requirements.txt örneği:
+# venv\Scripts\activate      # (Windows)
+3. Gerekli Kütüphaneleri Yükle
+requirements.txt içeriği:
 
 langchain
 langchain_community
@@ -110,64 +96,63 @@ chromadb
 wikipedia
 streamlit
 python-dotenv
+Komut:
 
-4️⃣ .env Dosyasını Hazırla
+Bash
 
-.env dosyası oluştur ve içine Google Gemini API anahtarını ekle:
+pip install -r requirements.txt
+4. .env Dosyasını Hazırla
+.env dosyası oluşturun ve içine Google Gemini API anahtarını ekleyin:
 
 GOOGLE_GENAI_API_KEY=senin_gemini_api_anahtarın
-
-
-API anahtarı almak için:
-👉 Google AI Studio - API Keys
+API anahtarı almak için: Google AI Studio - API Keys
 
 💻 Çalıştırma Adımları
-🔹 1. Wikipedia Verisini Çek
+Adım 1. Wikipedia Verisini Çek
+Bash
+
 python data_preparation.py
+Adım 2. Vektör Veritabanını Oluştur
+Bash
 
-🔹 2. Vektör Veritabanını Oluştur
 python build_vector_db.py
+Adım 3. Chatbot’u Başlat
+a) Terminal Versiyonu
 
-🔹 3. Chatbot’u Başlat
-➤ Terminal Versiyonu
+Bash
+
 python cli_chatbot.py
+b) Web Arayüzü (Streamlit)
 
-➤ Web Arayüzü (Streamlit)
+Bash
+
 streamlit run app.py
-
-Ardından tarayıcıda aç:
-👉 http://localhost:8501
+Ardından tarayıcıda açın: http://localhost:8501
 
 🌐 Web Arayüzü & Product Kılavuzu
-
-Streamlit arayüzü kullanıcıya sade ve sezgisel bir deneyim sunar.
-
 🧭 Akış
+Streamlit arayüzü sade ve sezgisel bir deneyim sunar:
 
-“Sorunu yaz” kutusuna metnini gir.
+“Sorunu yaz” kutusuna metninizi girin.
 
-“Gönder” butonuna tıkla.
+“Gönder” butonuna tıklayın.
 
-Model, Wikipedia veritabanını tarar.
+Model, Wikipedia veritabanını tarar ve yanıtı üretir.
 
-Cevabı ekrana yazar, altında kaynak linkleri görüntülenir.
+Cevap ekrana yazılır, altında kaynak linkleri görüntülenir.
 
-🖼️ Ekran Görünümü
+🖼️ Ekran Görünümü (Örnek)
 🤖 Cybersecurity RAG Chatbot
 -----------------------------------------
 Soru: What is a DDoS attack?
 ✅ Cevap: A DDoS (Distributed Denial of Service) attack is a cyber attack ...
 📚 Kaynak: Cybersecurity - Wikipedia
-
 🧾 Web Linki (Deploy)
+Deploy Linki Buraya Gelecektir.
 
-Streamlit Uygulaması (Deploy Linki)
+(Eğer lokal çalıştırıldıysa yukarıdaki link yerine http://localhost:8501 kullanılır.)
 
-(Eğer lokal çalıştırıldıysa yukarıdaki link yerine http://localhost:8501
- kullanılır.)
-
-🔍 Elde Edilen Sonuçlar
-
+🔍 Elde Edilen Sonuçlar Özet
 RAG mimarisiyle çalışan bir chatbot başarıyla oluşturulmuştur.
 
 Model, Wikipedia verilerinden doğru ve kaynaklı yanıtlar üretmektedir.
@@ -178,26 +163,23 @@ Gemini 2.5 Flash modeli hızlı, doğal ve açıklayıcı cevaplar üretmiştir.
 
 Örnek Soru-Cevap:
 
-❓ What are common types of cyber attacks?
-💬 Common cyber attacks include phishing, malware, ransomware, DDoS attacks, and man-in-the-middle attacks.
+❓ Soru: What are common types of cyber attacks?
+
+💬 Cevap: Common cyber attacks include phishing, malware, ransomware, DDoS attacks, and man-in-the-middle attacks.
+
 📚 Kaynak: Cybersecurity - Wikipedia
 
 🧑‍💻 Geliştirici Notu
-
-Bu proje, LangChain ve Google Gemini API kullanılarak modern bir RAG sisteminin sıfırdan nasıl kurulabileceğini göstermektedir.
-Hedef; açık kaynaklı verilerle çalışan, kullanıcıya kaynaklı ve güvenilir yanıtlar sunan bir yapay zekâ chatbotu geliştirmektir.
+Bu proje, LangChain ve Google Gemini API kullanılarak modern bir RAG sisteminin sıfırdan nasıl kurulabileceğini göstermektedir. Hedef; açık kaynaklı verilerle çalışan, kullanıcıya kaynaklı ve güvenilir yanıtlar sunan bir yapay zekâ chatbotu geliştirmektir.
 
 🏁 Lisans
-
-Bu proje eğitim amaçlı olarak geliştirilmiştir.
-Açık kaynaklıdır; üzerinde değişiklik yapılabilir, geliştirilebilir ve paylaşılabilir.
+Bu proje eğitim amaçlı olarak geliştirilmiştir. Açık kaynaklıdır; üzerinde değişiklik yapılabilir, geliştirilebilir ve paylaşılabilir.
 
 📎 İletişim
-
 Geliştirici: Esma Kaya
+
 Proje: Cybersecurity RAG Chatbot
+
 Kapsam: Akbank GenAI Bootcamp – Yeni Nesil Proje Kampı
+
 E-posta: [esmkyaa1@gmail.com]
-
----
-
