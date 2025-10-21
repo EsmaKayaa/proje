@@ -199,7 +199,9 @@ Açık kaynaklıdır; üzerinde değişiklik yapılabilir, geliştirilebilir ve 
 📎 İletişim
 
  E-posta: esmkyaa1@gmail.com
+ 
  GitHub: https://github.com/EsmaKayaa
+ 
  LinkedIn: https://www.linkedin.com/in/esma-kaya-6a811b335/
 
 
