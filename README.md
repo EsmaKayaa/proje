@@ -25,7 +25,7 @@ Veri toplama süreci data_preparation.py dosyasında otomatik olarak gerçekleş
 
 📄 Veri Hazırlama Süreci
 
-wikipedia kütüphanesi kullanılarak “Cybersecurity” başlıklı sayfa indirildi.
+Wikipedia kütüphanesi kullanılarak “Cybersecurity” başlıklı sayfa indirildi.
 
 Gereksiz karakterler, referans numaraları ve fazla satır boşlukları temizlendi.
 
@@ -68,10 +68,10 @@ Soru --> Retriever (Chroma DB) --> İlgili Belgeler --> LLM (Gemini) --> Cevap +
 Proje 4 ana bileşenden oluşur:
 
 Dosya	Açıklama
-data_preparation.py	Wikipedia’dan veriyi çeker, temizler ve kaydeder.
-build_vector_db.py	Metinleri böler, embedding uygular ve Chroma DB oluşturur.
-cli_chatbot.py	Terminal tabanlı sohbet arayüzü.
-app.py	Streamlit tabanlı web arayüzü.
+data_preparation.py	   Wikipedia’dan veriyi çeker, temizler ve kaydeder.
+build_vector_db.py	   Metinleri böler, embedding uygular ve Chroma DB oluşturur.
+cli_chatbot.py	       Terminal tabanlı sohbet arayüzü.
+app.py	               Streamlit tabanlı web arayüzü.
 
 Genel Yapı:
 
