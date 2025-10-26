@@ -93,7 +93,7 @@ cybersecurity-rag-chatbot/
 
 ⚙️ Kodun Çalışma Kılavuzu
 1️⃣ Ortam Kurulumu
-git clone https://github.com/kullaniciadi/cybersecurity-rag-chatbot.git
+git clone https://github.com/EsmaKayaa/cybersecurity-rag-chatbot.git
 cd cybersecurity-rag-chatbot
 
 2️⃣ Sanal Ortam (Virtual Env) Kurulumu
